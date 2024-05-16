@@ -10,6 +10,12 @@ class Board:
         self.height = height
 
 
+def clear():
+    """
+    Cleans terminal.
+    """
+    os.system('cls')
+
 def typingPrint(text):
     """
     Typing effect for text.
