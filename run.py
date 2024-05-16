@@ -1,6 +1,7 @@
 """
 Libraries and imports
 """
+from random import randint
 import os, sys, time
 import pyfiglet
 
@@ -80,3 +81,14 @@ def intro():
     print('You must find it to get out!')
     time.sleep(2)
     clear() 
+
+def game():
+    """
+    Sets game variables.
+    """
+    player_x  = 0
+    player_y  = 0
+    steps = 0
+    key_x = randint(0, Board.width)
+    key_y = randint(0, Board.height)
+    key_found  = False
