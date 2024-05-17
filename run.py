@@ -2,6 +2,7 @@
 Libraries and imports
 """
 from random import randint
+from math import sqrt
 import os, sys, time
 import pyfiglet
 
@@ -58,7 +59,8 @@ def difficulty():
 
     else :
         print('You do not stand a chance in this game if you cannot follow simple instructions.')          
-        level = int(input('Enter 1, 2 or 3:\n'))             
+        level = int(input('Enter 1, 2 or 3:\n'))
+                   
 
 def intro():
     """
@@ -71,9 +73,10 @@ def intro():
     typingPrint('Suddenly you hear a hushed voice in the dark.\n')
     time.sleep(1)
     print('Who are you? What is your name?\n')
-    name = input('Enter your name.')
+    name = input('Enter your name.\n')
     if not name.isalpha():
         print("Only letters are allowed!")
+        name = input('Enter your name.\n')
     print(f'{name.capitalize()} you are our only chance to get out of here alive!\n')
     time.sleep(2)
     print('There is a key somewhere on the ground.\n')
@@ -92,3 +95,16 @@ def game():
     key_x = randint(0, Board.width)
     key_y = randint(0, Board.height)
     key_found  = False
+
+def before():
+    """
+    Measuring distance to key before move for the hints
+    """
+    #before_move = sqrt((key_x - player_x) ** 2 + (key_y - player_y) ** 2)
+
+
+
+if __name__ == '__main__':
+    welcome_screen()
+    difficulty()
+    intro()    
