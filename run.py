@@ -164,10 +164,19 @@ def after():
 
     before_move = after_move 
 
-        
+def end_game():
+    """Key found and steps total """
+
+    free = pyfiglet.figlet_format('Free!',font= 'doom')
+    if player_x == key_x and player_y == key_y:
+        print('You found the \U0001F511 ! You are')
+        print(free)
+        print(f'It took you {steps} steps to get out.')
+        quit()        
 
 if __name__ == '__main__':
     welcome_screen()
     difficulty()
-    intro() 
+    intro()
+    end_game() 
        
