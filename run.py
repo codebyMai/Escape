@@ -7,7 +7,7 @@ import os, sys, time
 import pyfiglet
 
 class Board:
-     def __init__(self, width, height): 
+    def __init__(self, width, height): 
         self.width = width
         self.height = height
 
@@ -38,13 +38,54 @@ def welcome_screen():
     print('How brave are you?')
     print('1. Very brave! I am only scared of x-large, hairy spiders.')
     print('2. Reasonably brave. I am only occasionaly riddled with self doubt and fear of public humilation.')
-    print('3. I am already scared...')        
-
+    print('3. I am already scared...') 
+            
 def difficulty():
     """
-    Sets size of the board depending on the user choice of difficulty.
+    This function will ask player to choose dificulty level for the game.
+
     """
-    level = int(input('Enter 1,2 or 3 depending how brave are you feeling.'))
+    while True:
+        try:
+         
+            level = int(input('Enter 1,2 or 3 depending how brave are you feeling.\n'))
+            if level == 1:
+                Board.width  = 20
+                Board.height  = 20 
+                break
+            elif level == 2:
+                Board.width  = 15
+                Board.height  = 15
+                break
+            elif level == 3:
+                Board.width  = 10
+                Board.height  = 10
+                break
+            else:
+                clear()
+                raise ValueError()
+        except ValueError as e_rr:
+            print('You do not stand a chance in this game if you cannot follow simple instructions.')
+    clear()
+    return Board.height, Board.width
+
+"""def difficulty():
+
+    Sets size of the board depending on the user choice of difficulty.
+    while True:
+        try:
+            level = int(input('Enter 1,2 or 3 depending how brave are you feeling.\n'))
+            
+            if level == 1 or 2 or 3:
+                choice()
+            else:
+                print('You do not stand a chance in this game if you cannot follow simple instructions.')
+                continue
+        except ValueError:   
+            print('You ')
+            
+    
+def choice():
     if level := 1:
         Board.width  = 20
         Board.height  = 20 
@@ -53,20 +94,21 @@ def difficulty():
         Board.width  = 15
         Board.height  = 15
 
-    elif level := 3:
+    else:
+        level == 3
         Board.width  = 10
         Board.height  = 10
 
-    else :
-        print('You do not stand a chance in this game if you cannot follow simple instructions.')          
-        level = int(input('Enter 1, 2 or 3:\n'))
-                   
+    else:
+        if level != 1 or 2 or 3:
+            print('You do not stand a chance in this game if you cannot follow simple instructions.')
+            level = input('Enter 1, 2 or 3:\n')"""                  
 
 def intro():
     """
     Prints introduction and asks user for their name.
     """
-    typingPrint('It is cold, pitch black and very, very quiet.\n ')
+    typingPrint('It is cold, pitch black and very, very quiet.\n')
     time.sleep(1)
     typingPrint('With horror you realise you have no idea where you are or how you got here...\n')
     time.sleep(3)       
