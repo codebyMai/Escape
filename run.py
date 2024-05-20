@@ -6,9 +6,6 @@ from math import sqrt
 import os, sys, time
 import pyfiglet
 
-
-
-
 def clear():
     """
     Cleans terminal.
@@ -37,19 +34,32 @@ def welcome_screen():
     print('2. Reasonably brave. I am only occasionaly riddled with self doubt and fear of public humilation.')
     print('3. I am already scared...') 
 
+
+
 def difficulty():
     """
     This function will ask player to choose dificulty level for the game.
 
     """
+    global player_x
+    player_x = 0
+    global player_y
+    player_y = 0
     global game_width
     global game_height
+    global level
     while True:
         try:
             level = int(input('Enter 1,2 or 3 depending how brave are you feeling.\n'))
             if level == 1:
                 game_width  = 20
                 game_height  = 20
+                global spider_x
+                global spider_y
+                spider_x = randint(0, game_width)
+                spider_y = randint(0, game_height)
+                #obstacle_one()
+               
                 break
             elif level == 2:
                 game_width  = 15
@@ -66,7 +76,19 @@ def difficulty():
             print('You do not stand a chance in this game if you cannot follow simple instructions.')
     clear()
     #return game_height, game_width
-      
+
+def before():
+   
+    """Measuring distance to key before move for the hints"""
+    player_x  = 0
+    player_y  = 0 
+    global key_x
+    key_x = randint(0, game_width)
+    global key_y
+    key_y = randint(0, game_height)
+    global before_move
+    before_move = sqrt((key_x - player_x) ** 2 + (key_y - player_y) ** 2)
+    print(key_x, key_y)      
 
 def intro():
     """
@@ -75,7 +97,7 @@ def intro():
     typingPrint('It is cold, pitch black and very, very quiet.\n')
     time.sleep(1)
     typingPrint('With horror you realise you have no idea where you are or how you got here...\n')
-    time.sleep(3)       
+    time.sleep(1)       
     typingPrint('Suddenly you hear a hushed voice in the dark.\n')
     time.sleep(1)
     print('Who are you? What is your name?\n')
@@ -84,31 +106,15 @@ def intro():
         print("Only letters are allowed!")
         name = input('Enter your name.\n')
     print(f'{name.capitalize()} you are our only chance to get out of here alive!\n')
-    time.sleep(2)
+    time.sleep(1)
     print('There is a key somewhere on the ground.\n')
-    time.sleep(2)
+    time.sleep(1)
     print('You must find it to get out!')
-    time.sleep(2)
+    time.sleep(1)
     clear()
     moves() 
 
-def before():
-   
-    """Measuring distance to key before move for the hints"""
-    
-   
-    player_x  = 0
-    
-    player_y  = 0 
-    global key_x
-    key_x = randint(0, game_width)
-    global key_y
-    key_y = randint(0, game_height)
-    global before_move
-    before_move = sqrt((key_x - player_x) ** 2 + (key_y - player_y) ** 2)
-    print(key_x, key_y)
 
-  
 def moves():
     """
     Player movements and steps addition"
@@ -118,12 +124,14 @@ def moves():
     player_x = 0
     global player_y
     player_y = 0
-    
+    global steps
+    global spider_x
+    global spider_y
+    steps = 0 
     key_found  = False 
     before()
     while not key_found:
-        global steps
-        steps = 0  
+       
         
         steps += 1
         move = input('Quick! Where do you want to go?')
@@ -159,8 +167,18 @@ def moves():
             case _:
                 print ('You can only move using W/S/A/D keys!')
                 continue  
+        if level == 1 and player_x == spider_x and player_y == spider_y:
+            print('Ew!\U0001F578 You walked into a spider web!')
+            print('You recoil in horror and end up back where you have started!')
+            player_x = 0
+            player_y = 0
         after()
+        
+
         print(player_x, player_y)
+        
+        
+
 def after():
     """
     Distance from the key and hints
@@ -174,6 +192,8 @@ def after():
 
     before_move = after_move 
     end_game()
+
+
 
 def end_game():
     """Key found and steps total """
