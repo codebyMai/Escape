@@ -7,9 +7,7 @@ import os, sys, time
 import pyfiglet
 
 
-player_x  = 0
-player_y  = 0
-steps = 0   
+
 
 def clear():
     """
@@ -97,6 +95,11 @@ def intro():
 def before():
    
     """Measuring distance to key before move for the hints"""
+    
+   
+    player_x  = 0
+    
+    player_y  = 0 
     global key_x
     key_x = randint(0, game_width)
     global key_y
@@ -110,12 +113,18 @@ def moves():
     """
     Player movements and steps addition"
     """
+    
+    global player_x
+    player_x = 0
+    global player_y
+    player_y = 0
+    
     key_found  = False 
     before()
     while not key_found:
         global steps
-        global player_x
-        global player_y
+        steps = 0  
+        
         steps += 1
         move = input('Quick! Where do you want to go?')
         match move.lower():
@@ -184,7 +193,7 @@ def end_game():
 def options():
     while True:
         try:
-            choice = int(input('Enter 1,2 or 3 depending how brave are you feeling.\n'))
+            choice = int(input('\n'))
             if choice == 1:
                 clear()
                 welcome_screen()
