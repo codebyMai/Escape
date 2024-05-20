@@ -103,6 +103,7 @@ def before():
     key_y = randint(0, game_height)
     global before_move
     before_move = sqrt((key_x - player_x) ** 2 + (key_y - player_y) ** 2)
+    print(key_x, key_y)
 
   
 def moves():
@@ -150,7 +151,7 @@ def moves():
                 print ('You can only move using W/S/A/D keys!')
                 continue  
         after()
-
+        print(player_x, player_y)
 def after():
     """
     Distance from the key and hints
@@ -163,6 +164,7 @@ def after():
        print('You are moving away from the key!')
 
     before_move = after_move 
+    end_game()
 
 def end_game():
     """Key found and steps total """
@@ -172,11 +174,38 @@ def end_game():
         print('You found the \U0001F511 ! You are')
         print(free)
         print(f'It took you {steps} steps to get out.')
-        quit()        
+        print('To play againg press 1')
+        print('To check "Hall of Fame" scores press 2')
+        print('To quit press 3')
+        options() 
+
+#def score():
+
+def options():
+    while True:
+        try:
+            choice = int(input('Enter 1,2 or 3 depending how brave are you feeling.\n'))
+            if choice == 1:
+                clear()
+                welcome_screen()
+                difficulty()
+                intro()
+            elif choice == 2:
+                score()
+                break
+            elif choice == 3:
+                quit()
+            else:
+                clear()
+                raise ValueError()
+        except ValueError as e_rr:
+            print('Try again. Press 1, 2 or 3.')
+
+
 
 if __name__ == '__main__':
     welcome_screen()
     difficulty()
     intro()
-    end_game() 
+     
        
