@@ -58,12 +58,14 @@ def difficulty():
                 global spider_y
                 spider_x = randint(0, game_width)
                 spider_y = randint(0, game_height)
-                #obstacle_one()
-               
                 break
             elif level == 2:
                 game_width  = 15
                 game_height  = 15
+                global doubt_x
+                global doubt_y
+                doubt_x = randint(0, game_width)
+                doubt_y = randint(0, game_height)
                 break
             elif level == 3:
                 game_width  = 10
@@ -80,6 +82,7 @@ def difficulty():
 def before():
    
     """Measuring distance to key before move for the hints"""
+    global player_x
     player_x  = 0
     player_y  = 0 
     global key_x
@@ -125,8 +128,9 @@ def moves():
     global player_y
     player_y = 0
     global steps
-    global spider_x
-    global spider_y
+    #global spider_x
+    #global spider_y
+    
     steps = 0 
     key_found  = False 
     before()
@@ -167,18 +171,22 @@ def moves():
             case _:
                 print ('You can only move using W/S/A/D keys!')
                 continue  
+        after()
+
         if level == 1 and player_x == spider_x and player_y == spider_y:
             print('Ew!\U0001F578 You walked into a spider web!')
-            print('You recoil in horror and end up back where you have started!')
+            print('You recoil in horror and end up back where you started!')
             player_x = 0
             player_y = 0
-        after()
-        
+       
+        if level == 2 and player_x == doubt_x and player_y == doubt_y:
+            print('Suddenly you feel riddled with self doubt!')
+            print('You stagger back to where you started!')
+            player_x = 0
+            player_y = 0
 
         print(player_x, player_y)
         
-        
-
 def after():
     """
     Distance from the key and hints
@@ -193,8 +201,6 @@ def after():
     before_move = after_move 
     end_game()
 
-
-
 def end_game():
     """Key found and steps total """
 
@@ -203,9 +209,9 @@ def end_game():
         print('You found the \U0001F511 ! You are')
         print(free)
         print(f'It took you {steps} steps to get out.')
-        print('To play againg press 1')
-        print('To check "Hall of Fame" scores press 2')
-        print('To quit press 3')
+        print('To play againg - type 1')
+        print('To check "Hall of Fame" scores - type 2')
+        print('To quit - type 3')
         options() 
 
 #def score():
@@ -229,8 +235,6 @@ def options():
                 raise ValueError()
         except ValueError as e_rr:
             print('Try again. Press 1, 2 or 3.')
-
-
 
 if __name__ == '__main__':
     welcome_screen()
