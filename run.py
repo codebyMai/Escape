@@ -3,8 +3,25 @@ Libraries and imports
 """
 from random import randint
 from math import sqrt
+from google.oauth2.service_account import Credentials
+from tabulate import tabulate
 import os, sys, time
 import pyfiglet
+import gspread
+
+
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+    ]
+
+CREDS = Credentials.from_service_account_file("creds.json")
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open("hall_of_fame")
+
+leaders = SHEET.worksheet('leaderboard')
 
 def clear():
     """
@@ -41,12 +58,12 @@ def difficulty():
     This function will ask player to choose dificulty level for the game.
 
     """
+    global game_width
+    global game_height
     global player_x
     player_x = 0
     global player_y
     player_y = 0
-    global game_width
-    global game_height
     global level
     while True:
         try:
@@ -77,11 +94,13 @@ def difficulty():
         except ValueError as e_rr:
             print('You do not stand a chance in this game if you cannot follow simple instructions.')
     clear()
-    #return game_height, game_width
+    print(game_height, game_width)
+        
 
 def before():
    
     """Measuring distance to key before move for the hints"""
+    
     global player_x
     player_x  = 0
     player_y  = 0 
@@ -97,6 +116,7 @@ def intro():
     """
     Prints introduction and asks user for their name.
     """
+    global name
     typingPrint('It is cold, pitch black and very, very quiet.\n')
     time.sleep(1)
     typingPrint('With horror you realise you have no idea where you are or how you got here...\n')
@@ -105,6 +125,7 @@ def intro():
     time.sleep(1)
     print('Who are you? What is your name?\n')
     name = input('Enter your name.\n')
+    name.capitalize()
     if not name.isalpha():
         print("Only letters are allowed!")
         name = input('Enter your name.\n')
@@ -114,9 +135,10 @@ def intro():
     time.sleep(1)
     print('You must find it to get out!')
     time.sleep(1)
+    
     clear()
     moves() 
-
+    return name
 
 def moves():
     """
@@ -212,9 +234,30 @@ def end_game():
         print('To play againg - type 1')
         print('To check "Hall of Fame" scores - type 2')
         print('To quit - type 3')
+        update_score()
         options() 
 
-#def score():
+def update_score():
+    """
+    Function to update data on google sheets
+    """
+    name.capitalize()
+    update = [name, steps]
+    leaders.insert_row(update, 2)
+
+def results():
+    """
+    Function to display scores on user request
+    """
+    clear()
+    leaders.sort((2, "des"))
+    data = leaders.get("A2:B11")
+    print("Top 10 scores\n")
+    print(tabulate(data, headers=["name", "score"]))
+    options()
+    
+    
+     
 
 def options():
     while True:
@@ -226,7 +269,7 @@ def options():
                 difficulty()
                 intro()
             elif choice == 2:
-                score()
+                results()
                 break
             elif choice == 3:
                 quit()
