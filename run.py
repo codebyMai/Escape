@@ -9,7 +9,6 @@ import os, sys, time
 import pyfiglet
 import gspread
 
-
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -45,13 +44,11 @@ def welcome_screen():
     title = pyfiglet.figlet_format('Escape',font= 'doom')
     typingPrint(title)    
 
-    print('Warning! This game is going to make you face your deepest fears...')
+    print('Warning! This game is going to make you face your deepest fears...\n')
     print('How brave are you?')
     print('1. Very brave! I am only scared of x-large, hairy spiders.')
     print('2. Reasonably brave. I am only occasionaly riddled with self doubt and fear of public humilation.')
     print('3. I am already scared...') 
-
-
 
 def difficulty():
     """
@@ -93,9 +90,7 @@ def difficulty():
         except ValueError as e_rr:
             print('You do not stand a chance in this game if you cannot follow simple instructions.')
     clear()
-    print(game_height, game_width)
         
-
 def before():
     """
     Measures distance to the key before move to enable hints
@@ -105,8 +100,7 @@ def before():
     global key_y
     key_y = randint(0, game_height)
     global before_move
-    before_move = sqrt((key_x - player_x) ** 2 + (key_y - player_y) ** 2)
-    print(key_x, key_y)      
+    before_move = sqrt((key_x - player_x) ** 2 + (key_y - player_y) ** 2)      
 
 def intro():
     """
@@ -214,7 +208,7 @@ def after():
 
 def end_game():
     """
-    Display message when key found and update the step count 
+    Displays message when key found and update the step count 
     """
     free = pyfiglet.figlet_format('Free!',font= 'doom')
     if player_x == key_x and player_y == key_y:
@@ -226,7 +220,7 @@ def end_game():
 
 def end_game_choice():
     """
-    Display choice of options
+    Displays choice of options
     """            
     print('To play againg - type 1.')
     print('To check "Hall of Fame" scores - type 2.')
@@ -246,10 +240,10 @@ def results():
     Displays scores on user request
     """
     clear()
-    leaders.sort((2, "asc"))
+    leaders.sort((2, 'asc'))
     data = leaders.get("A2:B11")
     print("Top 10 scores\n")
-    print(tabulate(data, headers=["name", "score"]))
+    print(tabulate(data, headers=['name', 'score']))
     while True:
         back = int(input('\nPress 1 to get back to menu.\n'))
         try:
