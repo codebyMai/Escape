@@ -100,11 +100,6 @@ def before():
     """
     Measures distance to the key before move to enable hints
     """
-    
-    global player_x
-    player_x  = 0
-    global player_y
-    player_y  = 0 
     global key_x
     key_x = randint(0, game_width)
     global key_y
@@ -142,9 +137,8 @@ def intro():
 
 def moves():
     """
-    Player movements and steps addition"
+    Player movements, steps addition and obstacle encounters"
     """
-    
     global player_x
     player_x = 0
     global player_y
@@ -156,9 +150,8 @@ def moves():
     before()
     while not key_found:
        
-        
         steps += 1
-        move = input('Quick! Where do you want to go?')
+        move = input('Quick! Where do you want to go?\n')
         match move.lower():
             case 'w':
                 player_y += 1
@@ -204,8 +197,6 @@ def moves():
             print('You stagger back to where you started!')
             player_x = 0
             player_y = 0
-
-        print(player_x, player_y)
         
 def after():
     """
@@ -225,17 +216,22 @@ def end_game():
     """
     Display message when key found and update the step count 
     """
-
     free = pyfiglet.figlet_format('Free!',font= 'doom')
     if player_x == key_x and player_y == key_y:
         print('You found the \U0001F511 ! You are')
         print(free)
         print(f'It took you {steps} steps to get out.')
-        print('To play againg - type 1')
-        print('To check "Hall of Fame" scores - type 2')
-        print('To quit - type 3')
         update_score()
-        options() 
+        end_game_choice()
+
+def end_game_choice():
+    """
+    Display choice of options
+    """            
+    print('To play againg - type 1.')
+    print('To check "Hall of Fame" scores - type 2.')
+    print('To quit - type 3.')
+    options() 
 
 def update_score():
     """
@@ -247,19 +243,30 @@ def update_score():
 
 def results():
     """
-    Function to display scores on user request
+    Displays scores on user request
     """
     clear()
     leaders.sort((2, "asc"))
     data = leaders.get("A2:B11")
     print("Top 10 scores\n")
     print(tabulate(data, headers=["name", "score"]))
-    options()
+    while True:
+        back = int(input('\nPress 1 to get back to menu.\n'))
+        try:
+            if back == 1:
+                clear()
+                end_game_choice()
+                break
+            else:
+                clear()
+                raise ValueError()
+        except ValueError as e_rr:
+            print(f'You must press 1 to go back.')
     
-    
-     
-
 def options():
+    """
+    Options offered to user at the end of game
+    """
     while True:
         try:
             choice = int(input('\n'))
