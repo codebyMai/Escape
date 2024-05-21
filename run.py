@@ -25,13 +25,13 @@ leaders = SHEET.worksheet('leaderboard')
 
 def clear():
     """
-    Cleans terminal.
+    Cleans terminal
     """
     os.system('cls')
 
 def typingPrint(text):
     """
-    Typing effect for text.
+    Typing effect for text
     """
     for character in text:
         sys.stdout.write(character)
@@ -40,7 +40,7 @@ def typingPrint(text):
 
 def welcome_screen():
     """
-    Prints title of the game and asks user to choose difficulty level.
+    Prints title of the game and asks user to choose difficulty level
     """
     title = pyfiglet.figlet_format('Escape',font= 'doom')
     typingPrint(title)    
@@ -55,8 +55,7 @@ def welcome_screen():
 
 def difficulty():
     """
-    This function will ask player to choose dificulty level for the game.
-
+    Sets board size and adds obstacle depending on the chosen level
     """
     global game_width
     global game_height
@@ -98,11 +97,13 @@ def difficulty():
         
 
 def before():
-   
-    """Measuring distance to key before move for the hints"""
+    """
+    Measures distance to the key before move to enable hints
+    """
     
     global player_x
     player_x  = 0
+    global player_y
     player_y  = 0 
     global key_x
     key_x = randint(0, game_width)
@@ -137,7 +138,7 @@ def intro():
     
     clear()
     moves() 
-    
+    return name
 
 def moves():
     """
@@ -149,8 +150,6 @@ def moves():
     global player_y
     player_y = 0
     global steps
-    #global spider_x
-    #global spider_y
     
     steps = 0 
     key_found  = False 
@@ -223,7 +222,9 @@ def after():
     end_game()
 
 def end_game():
-    """Key found and steps total """
+    """
+    Display message when key found and update the step count 
+    """
 
     free = pyfiglet.figlet_format('Free!',font= 'doom')
     if player_x == key_x and player_y == key_y:
@@ -238,9 +239,10 @@ def end_game():
 
 def update_score():
     """
-    Function to update data on google sheets
+    Updates data on google sheets
     """
-    update = [name, steps]
+    user = name.capitalize()
+    update = [user, steps]
     leaders.insert_row(update, 2)
 
 def results():
