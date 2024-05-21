@@ -125,7 +125,6 @@ def intro():
     time.sleep(1)
     print('Who are you? What is your name?\n')
     name = input('Enter your name.\n')
-    name.capitalize()
     if not name.isalpha():
         print("Only letters are allowed!")
         name = input('Enter your name.\n')
@@ -138,7 +137,7 @@ def intro():
     
     clear()
     moves() 
-    return name
+    
 
 def moves():
     """
@@ -241,7 +240,6 @@ def update_score():
     """
     Function to update data on google sheets
     """
-    name.capitalize()
     update = [name, steps]
     leaders.insert_row(update, 2)
 
@@ -250,7 +248,7 @@ def results():
     Function to display scores on user request
     """
     clear()
-    leaders.sort((2, "des"))
+    leaders.sort((2, "asc"))
     data = leaders.get("A2:B11")
     print("Top 10 scores\n")
     print(tabulate(data, headers=["name", "score"]))
