@@ -61,7 +61,7 @@ def welcome_screen():
     print(Back.RED + 'You are going to face your deepest fears...')
     print(Fore.YELLOW + Style.BRIGHT + 'How brave are you?')
     print('1. Very brave! I am only scared of x-large, hairy spiders.')
-    print('2. Reasonably brave. Occasionaly troubled by bad dreams.')
+    print('2. Reasonably brave. Occasionaly scared by bad dreams.')
     print('3. I am already scared...')
 
 
@@ -84,20 +84,20 @@ def difficulty():
         try:
             level = int(input('Enter 1,2 or 3.\n'))
             if level == 1:
-                game_width = 20
-                game_height = 20
+                game_width = 15
+                game_height = 15
                 spider_x = randint(0, game_width)
                 spider_y = randint(0, game_height)
                 break
             elif level == 2:
-                game_width = 15
-                game_height = 15
+                game_width = 10
+                game_height = 10
                 fear_x = randint(0, game_width)
                 fear_y = randint(0, game_height)
                 break
             elif level == 3:
-                game_width = 10
-                game_height = 10
+                game_width = 7
+                game_height = 7
                 break
             else:
                 clear()
