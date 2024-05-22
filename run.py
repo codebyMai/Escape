@@ -41,6 +41,8 @@ def typingPrint(text):
         sys.stdout.flush()
         time.sleep(0.01)
 
+def quit():
+    welcome_screen()
 
 def welcome_screen():
     """
@@ -53,7 +55,7 @@ def welcome_screen():
     print('This game is going to make you face your deepest fears...\n')
     print('How brave are you?')
     print('1. Very brave! I am only scared of x-large, hairy spiders.')
-    print('2. Reasonably brave. Occasionaly riddled with self doubt.')
+    print('2. Reasonably brave. Occasionaly troubled by bad dreams.')
     print('3. I am already scared...')
 
 
@@ -68,24 +70,24 @@ def difficulty():
     global player_y
     player_y = 0
     global level
+    global spider_x
+    global spider_y
+    global fear_x
+    global fear_y
     while True:
         try:
             level = int(input('Enter 1,2 or 3 depending how brave you are.\n'))
             if level == 1:
                 game_width = 20
                 game_height = 20
-                global spider_x
-                global spider_y
                 spider_x = randint(0, game_width)
                 spider_y = randint(0, game_height)
                 break
             elif level == 2:
                 game_width = 15
                 game_height = 15
-                global doubt_x
-                global doubt_y
-                doubt_x = randint(0, game_width)
-                doubt_y = randint(0, game_height)
+                fear_x = randint(0, game_width)
+                fear_y = randint(0, game_height)
                 break
             elif level == 3:
                 game_width = 10
@@ -109,7 +111,7 @@ def before():
     key_y = randint(0, game_height)
     global before_move
     before_move = sqrt((key_x - player_x) ** 2 + (key_y - player_y) ** 2)
-
+    
 
 def intro():
     """
@@ -152,6 +154,12 @@ def moves():
     steps = 0
     key_found = False
     before()
+    print('You are in a square, pitch black room.')
+    print('To get out you need to find a key.')
+    print('Use W/S/D/A keys to move.')
+    print('W - up, S - down, D - right, A - left.')
+    print('Follow the helpful hints.')
+    print('If you chicken out press Q to quit.')
     while not key_found:
         steps += 1
         move = input('Quick! Where do you want to go?\n')
@@ -171,13 +179,13 @@ def moves():
             case 'a':
                 player_x -= 1
                 if player_x < 0:
-                    print('You are going to end up concussed!')
+                    print('Oops! You have just crashed into the wall!')
                     player_x = 0
 
             case 'd':
                 player_x += 1
                 if player_x > game_width:
-                    print('You hit the wall!')
+                    print(f'@\u21af\u2737! You cannot walk through walls.')
                     player_x = game_width
 
             case 'q':
@@ -194,8 +202,8 @@ def moves():
             print('You recoil in horror and end up back where you started!')
             player_x = 0
             player_y = 0
-        if level == 2 and player_x == doubt_x and player_y == doubt_y:
-            print('Suddenly you feel riddled with self doubt!')
+        if level == 2 and player_x == fear_x and player_y == fear_y:
+            print('Suddenly you feel a wave of panic!')
             print('You stagger back to where you started!')
             player_x = 0
             player_y = 0
