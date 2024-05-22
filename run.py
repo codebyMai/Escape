@@ -49,6 +49,7 @@ def quit():
     difficulty()
     intro()
 
+
 def welcome_screen():
     """
     Prints title of the game and asks user to choose difficulty level
@@ -162,7 +163,7 @@ def moves():
     print('You are in a square, pitch black room.')
     print('To get out you need to find the key.')
     print(Fore.YELLOW + Style.BRIGHT + 'Use W/S/D/A keys to move.')
-    print(Fore.YELLOW + Style.BRIGHT + 'W - up, S - down, D - right, A - left.')
+    print(Fore.YELLOW + Style.BRIGHT + 'W- up, S- down, D- right, A- left.')
     print('Follow the helpful hints.')
     print('If you chicken out press Q to quit.\n')
     while not key_found:
@@ -221,7 +222,7 @@ def after():
     global before_move
     after_move = sqrt((key_x - player_x) ** 2 + (key_y - player_y) ** 2)
     if before_move > after_move:
-        print(Back.GREEN + Style.BRIGHT + 'You are getting closer!')
+        print(Fore.GREEN + Style.BRIGHT + 'You are getting closer!')
     else:
         print(Fore.RED + Style.BRIGHT + 'You are moving away from the key!')
     before_move = after_move
@@ -235,9 +236,9 @@ def end_game():
     free = pyfiglet.figlet_format('Free!', font='doom')
     if player_x == key_x and player_y == key_y:
         print('\n')
-        print(Back.YELLOW + Style.BRIGHT + 'You found the key! You are')
+        print(Fore.YELLOW + Style.BRIGHT + 'You found the key! You are')
         print(free)
-        print(Back.RED + f'It took you {steps} steps to get out.')
+        print(Fore.RED + Style.BRIGHT + f'You took {steps} steps to get out.')
         update_score()
         end_game_choice()
 
