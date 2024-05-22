@@ -5,7 +5,7 @@ from random import randint
 from math import sqrt
 from google.oauth2.service_account import Credentials
 from tabulate import tabulate
-from colorama import Fore, init, Style
+from colorama import Fore, init, Back, Style
 import os
 import sys
 import time
@@ -46,7 +46,8 @@ def typingPrint(text):
 
 def quit():
     welcome_screen()
-
+    difficulty()
+    intro()
 
 def welcome_screen():
     """
@@ -55,9 +56,9 @@ def welcome_screen():
     title = pyfiglet.figlet_format('Escape', font='doom')
     typingPrint(title)
 
-    print(Fore.RED + 'Warning!')
-    print(Fore.RED + 'You are going to face your deepest fears...\n')
-    print(Fore.YELLOW + 'How brave are you?')
+    print(Back.RED + 'Warning!')
+    print(Back.RED + 'You are going to face your deepest fears...')
+    print(Fore.YELLOW + Style.BRIGHT + 'How brave are you?')
     print('1. Very brave! I am only scared of x-large, hairy spiders.')
     print('2. Reasonably brave. Occasionaly troubled by bad dreams.')
     print('3. I am already scared...')
@@ -80,7 +81,7 @@ def difficulty():
     global fear_y
     while True:
         try:
-            level = int(input(Fore.GREEN + 'Enter 1,2 or 3.\n'))
+            level = int(input('Enter 1,2 or 3.\n'))
             if level == 1:
                 game_width = 20
                 game_height = 20
@@ -101,7 +102,7 @@ def difficulty():
                 clear()
                 raise ValueError()
         except ValueError:
-            print(Fore.RED + 'To survive you need to follow instructions!')
+            print(Back.RED + 'To survive you need to follow instructions!')
     clear()
 
 
@@ -130,11 +131,11 @@ def intro():
     time.sleep(1)
     typingPrint('Suddenly you hear a hushed voice in the dark.\n')
     time.sleep(1)
-    print(Fore.YELLOW + 'Who are you? What is your name?\n')
-    name = input(Fore.GREEN + 'Enter your name.\n')
+    print(Fore.YELLOW + Style.BRIGHT + 'Who are you? What is your name?')
+    name = input('Enter your name.\n')
     if not name.isalpha():
-        print(Fore.RED + 'Only letters are allowed!')
-        name = input(Fore.GREEN + 'Enter your name.\n')
+        print(Back.RED + 'Only letters are allowed!')
+        name = input('Enter your name.\n')
     print(Fore.YELLOW + f'{name.capitalize()} only you can save us!\n')
     time.sleep(1)
     print(Fore.YELLOW + 'There is a key somewhere on the ground.\n')
@@ -160,8 +161,8 @@ def moves():
     before()
     print('You are in a square, pitch black room.')
     print('To get out you need to find the key.')
-    print(Fore.YELLOW + 'Use W/S/D/A keys to move.')
-    print(Fore.YELLOW + 'W - up, S - down, D - right, A - left.')
+    print(Fore.YELLOW + Style.BRIGHT + 'Use W/S/D/A keys to move.')
+    print(Fore.YELLOW + Style.BRIGHT + 'W - up, S - down, D - right, A - left.')
     print('Follow the helpful hints.')
     print('If you chicken out press Q to quit.\n')
     while not key_found:
@@ -171,25 +172,25 @@ def moves():
             case 'w':
                 player_y += 1
                 if player_y > game_height:
-                    print(Fore.RED + '\nOops! You crashed into the wall!\n')
+                    print(Back.RED + '\nOops! You crashed into the wall!')
                     player_y = game_height
                     continue
             case 's':
                 player_y -= 1
                 if player_y < 0:
-                    print(Fore.RED + '\nYou cannot walk through walls!\n')
+                    print(Back.RED + '\nYou cannot walk through walls!')
                     player_y = 0
 
             case 'a':
                 player_x -= 1
                 if player_x < 0:
-                    print(Fore.RED + '\nOops! You crashed into the wall!\n')
+                    print(Back.RED + '\nOops! You crashed into the wall!')
                     player_x = 0
 
             case 'd':
                 player_x += 1
                 if player_x > game_width:
-                    print(Fore.RED + '\nYou cannot walk through walls!\n')
+                    print(Back.RED + '\nYou cannot walk through walls!')
                     player_x = game_width
 
             case 'q':
@@ -197,18 +198,18 @@ def moves():
                 quit()
 
             case _:
-                print(Fore.RED + 'You can only move using W/S/A/D keys!\n')
+                print(Back.RED + 'You can only move using W/S/A/D keys!')
                 continue
         after()
 
         if level == 1 and player_x == spider_x and player_y == spider_y:
-            print(Fore.RED + 'Ew!\U0001F578 You walked into a spider web!')
-            print(Fore.RED + 'You recoil in horror to back where you started!')
+            print(Back.RED + 'Ew!\U0001F578 You walked into a spider web!')
+            print(Back.RED + 'You recoil in horror to back where you started!')
             player_x = 0
             player_y = 0
         if level == 2 and player_x == fear_x and player_y == fear_y:
-            print(Fore.RED + 'Suddenly you feel a wave of panic!')
-            print(Fore.RED + 'You stagger back to where you started!')
+            print(Back.RED + 'Suddenly you feel a wave of panic!')
+            print(Back.RED + 'You stagger back to where you started!')
             player_x = 0
             player_y = 0
 
@@ -220,9 +221,9 @@ def after():
     global before_move
     after_move = sqrt((key_x - player_x) ** 2 + (key_y - player_y) ** 2)
     if before_move > after_move:
-        print(Fore.GREEN + 'You are getting closer!')
+        print(Back.GREEN + Style.BRIGHT + 'You are getting closer!')
     else:
-        print(Fore.RED + 'You are moving away from the key!')
+        print(Fore.RED + Style.BRIGHT + 'You are moving away from the key!')
     before_move = after_move
     end_game()
 
@@ -233,9 +234,10 @@ def end_game():
     """
     free = pyfiglet.figlet_format('Free!', font='doom')
     if player_x == key_x and player_y == key_y:
-        print(Fore.RED + 'You found the key! You are')
+        print('\n')
+        print(Back.YELLOW + Style.BRIGHT + 'You found the key! You are')
         print(free)
-        print(Fore.RED + f'It took you {steps} steps to get out.')
+        print(Back.RED + f'It took you {steps} steps to get out.')
         update_score()
         end_game_choice()
 
@@ -266,10 +268,10 @@ def results():
     clear()
     leaders.sort((2, 'asc'))
     data = leaders.get("A2:B11")
-    print("Top 10 scores\n")
+    print(Back.YELLOW + 'Top 10 scores\n')
     print(tabulate(data, headers=['name', 'score']))
     while True:
-        back = int(input(Fore.YELLOW + '\nPress 1 to get back to menu.\n'))
+        back = int(input('\nPress 1 to get back to menu.\n'))
         try:
             if back == 1:
                 clear()
@@ -279,7 +281,7 @@ def results():
                 clear()
                 raise ValueError()
         except ValueError:
-            print(f'You must press 1 to go back.')
+            print(Back.RED + f'You must press 1 to go back.')
 
 
 def options():
@@ -303,7 +305,7 @@ def options():
                 clear()
                 raise ValueError()
         except ValueError:
-            print(Fore.RED + 'Try again. Press 1, 2 or 3.')
+            print(Back.RED + 'Try again. Press 1, 2 or 3.')
 
 
 if __name__ == '__main__':
