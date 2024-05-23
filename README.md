@@ -1,5 +1,6 @@
 # Escape
 Escape is a thrilling yet simple and intuitive terminal game testing users ability to folllow instructions to get out of a terrifying situation.
+
 ![Escape showing  on various devices](assets/mockup.png)
 
 
