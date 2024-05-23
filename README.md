@@ -162,8 +162,11 @@ The game starts with the title screen and smoothly leads the user along through 
 ### Potential Future Updates and Features
 
 * Separate scorebords for different levels of difficulty.
+
 * Increased difficulty level by adding additional obstacles.
+
 * Growing levels of difficulty as player progresses.
+
 * Dedicated version for mobile devices.
 
 ---
@@ -203,9 +206,9 @@ Invalid input at any stage of the game is followed by the prompt to correct it.
 
 ### Accessibility
 
-  * Intuitive interface.
-  * Intuitive colour choices.
-  * Accessible on various devices.
+* Intuitive interface.
+* Intuitive colour choices.
+* Accessible on various devices.
 
 ---
 
@@ -216,41 +219,41 @@ Invalid input at any stage of the game is followed by the prompt to correct it.
 
 The game was created using VS Code and deployed using Code Institute mock terminal for Heroku:
 
-    1. Log in to Heroku.
-    2. Create a new Heroku app.
-    3. Select buildpacks to Python and NodeJS in that order.
-    5. In Heroku's settings, add a config var of PORT and set the value to 8000.
-    6. Select deploy method and search for repository.
-    7. Deploy.
+1. Log in to Heroku.
+2. Create a new Heroku app.
+3. Select buildpacks to Python and NodeJS in that order.
+5. In Heroku's settings, add a config var of PORT and set the value to 8000.
+6. Select deploy method and search for repository.
+7. Deploy.
 
 
 Forking
 
-    1. Log in to GitHub and locate the GitHub Repository
-    2. In the top-right corner of the page, click Fork.
-    3. Once clicked, you should have a copy of the repository.
+1. Log in to GitHub and locate the GitHub Repository
+2. In the top-right corner of the page, click Fork.
+3. Once clicked, you should have a copy of the repository.
 
 Cloning
 
-    1. On GitHub.com, navigate to your fork of the repository.
-    2. Above the list of files, click Code.
-    3. Select if you prefer to clone using HTTPS, SSH, or GitHub CLI and click the copy button to copy the URL to your clipboard.
-    4. Open Git Bash.
-    5. Change the current working directory to the location where you want the cloned directory.
-    6. Type git clone, and then paste the URL you copied earlier.
-    7. Press Enter to create your clone.
+1. On GitHub.com, navigate to your fork of the repository.
+2. Above the list of files, click Code.
+3. Select if you prefer to clone using HTTPS, SSH, or GitHub CLI and click the copy button to copy the URL to your clipboard.
+4. Open Git Bash.
+5. Change the current working directory to the location where you want the cloned directory.
+6. Type git clone, and then paste the URL you copied earlier.
+7. Press Enter to create your clone.
 
 
 ## Solved Bugs
 
-   1. User name not capitalized in scorechart.
-      * Added capitalization to the function updating score.
-   2. Background colour spilling over on the line below.
-      * Removed /n from the coloured line.
-   3. Clear function 'cls' not working after deployment to Heroku.
-      * Fixed by adding 'clear'option to the function - solution found on (https://stackoverflow.com/).
-   4. After deployment to Heroku quit function became irrelevant as due to the nature of the project terminal it was not quitting the program.
-      * As advised by the mentor I have opted to use it to bring the player back to the title screen.
+1. User name not capitalized in scorechart.
+    * Added capitalization to the function updating score.
+2. Background colour spilling over on the line below.
+    * Removed /n from the coloured line.
+3. Clear function 'cls' not working after deployment to Heroku.
+    * Fixed by adding 'clear'option to the function - solution found on (https://stackoverflow.com/).
+4. After deployment to Heroku quit function became irrelevant as due to the nature of the project terminal it was not quitting the program.
+    * As advised by the mentor I have opted to use it to bring the player back to the title screen.
    
 ---
 
@@ -259,37 +262,42 @@ Cloning
 
 ### Technologies Used
 
-   * [VSCode](https://code.visualstudio.com/)
+* [VSCode](https://code.visualstudio.com/)
 
-   * [Git](https://git-scm.com/)
+* [Git](https://git-scm.com/)
     
-   * [GitHub](https://github.com/)
+* [GitHub](https://github.com/)
    
-   * [Heroku](https://id.heroku.com)
+* [Heroku](https://id.heroku.com)
   
-   * [Mockup Screenshot Generator](https://ui.dev/amiresponsive)
+* [Mockup Screenshot Generator](https://ui.dev/amiresponsive)
 
-   * [Diagrams maker](https://app.diagrams.net/)
+* [Diagrams maker](https://app.diagrams.net/)
 
-   * [Code Institute Python Linter](https://pep8ci.herokuapp.com/)
+* [Code Institute Python Linter](https://pep8ci.herokuapp.com/)
 
 ### Reference Material
 
-   * [Love Sandwiches Walkthrough project](https://learn.codeinstitute.net/ci_program/diplomainsoftwaredevelopmentecomm)
-   * [W3 School](https://www.w3schools.com)
-   * [Stackoverflow](https://stackoverflow.com/)
-   * [Python Tutor](https://pythontutor.com/python-compiler.html#mode=edit)
-   * [Match case statement](https://learnpython.com/blog/python-match-case-statement/)
-   * [Typing text effects](https://www.101computing.net/python-typing-text-effect/)
-   * [Use of colorama](https://www.codu.co/articles/adding-colour-to-python-code-lbai_0u7)
+* [Love Sandwiches Walkthrough project](https://learn.codeinstitute.net/ci_program/diplomainsoftwaredevelopmentecomm)
+
+* [W3 School](https://www.w3schools.com)
+
+* [Stackoverflow](https://stackoverflow.com/)
+
+* [Python Tutor](https://pythontutor.com/python-compiler.html#mode=edit)
+
+* [Match case statement](https://learnpython.com/blog/python-match-case-statement/)
+
+* [Typing text effects](https://www.101computing.net/python-typing-text-effect/)
+   
+* [Use of colorama](https://www.codu.co/articles/adding-colour-to-python-code-lbai_0u7)
 
 ---
 
 ## Acknowledgements
 
-
-  * Mentor and Tutor suport at Code Institute.
-  * Code Institute team for creating mock terminal.
+* Mentor and Tutor suport at Code Institute.
+* Code Institute team for creating mock terminal.
 
  
 
